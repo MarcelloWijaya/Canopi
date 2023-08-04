@@ -28,7 +28,7 @@
         android:layout_marginTop="440dp"
         android:backgroundTint="#125289"
         android:shadowColor="#000000"
-        android:text="On1"
+        android:text="Push"
         android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +40,7 @@
         android:layout_marginTop="440dp"
         android:layout_marginEnd="96dp"
         android:backgroundTint="#125289"
-        android:text="On2"
+        android:text="Pull"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -58,24 +58,31 @@
 
     <ImageView
         android:id="@+id/canopy_open"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="264dp"
+        android:layout_width="229dp"
+        android:layout_height="229dp"
+        android:layout_marginTop="140dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/canopy_open" />
 
     <ImageView
-        android:id="@+id/canopy_closed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="264dp"
+        android:id="@+id/canopy_close"
+        android:layout_width="229dp"
+        android:layout_height="229dp"
+        android:layout_marginTop="140dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/canopy_closed" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Switch"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="599dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
