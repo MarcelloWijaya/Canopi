@@ -13,6 +13,8 @@ import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ImageView canopyOpenImageView;
+    private ImageView canopyCloseImageView;
     private Button onButton1;
     private Button onButton2;
     private Button offButton;
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        canopyOpenImageView = findViewById(R.id.canopy_open);
+        canopyCloseImageView = findViewById(R.id.canopy_close);
         textView = findViewById(R.id.textView);
         onButton1 = findViewById(R.id.onButton1);
         onButton2 = findViewById(R.id.onButton2);
@@ -77,6 +81,31 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
+            // Mengupdate status canopy berdasarkan hasil dari perintah yang dikirim
+            if (result.equalsIgnoreCase("Terbuka")) {
+                statusCanopy = "terbuka";
+            } else if (result.equalsIgnoreCase("Tertutup")) {
+                statusCanopy = "tertutup";
+            } else {
+                statusCanopy = "unknown"; // Jika status tidak dikenali atau terjadi kesalahan
+            }
+
+            // Memperbarui tampilan tombol berdasarkan status canopy
+            if ("terbuka".equals(statusCanopy)) {
+                // Jika status terbuka, maka tombol onButton1 akan ditampilkan, dan tombol onButton2 akan disembunyikan
+                onButton1.setVisibility(View.VISIBLE);
+                onButton2.setVisibility(View.GONE);
+                canopyOpenImageView.setVisibility(View.VISIBLE);
+                canopyCloseImageView.setVisibility(View.GONE);
+            } else if ("tertutup".equals(statusCanopy)) {
+                // Jika status tertutup, maka tombol onButton2 akan ditampilkan, dan tombol onButton1 akan disembunyikan
+                onButton2.setVisibility(View.VISIBLE);
+                onButton1.setVisibility(View.GONE);
+                canopyCloseImageView.setVisibility(View.VISIBLE);
+                canopyOpenImageView.setVisibility(View.GONE);
+            }
+
+            // Mengatur teks di textView dengan hasil dari perintah yang dikirim
             textView.setText("Hasil koneksi: " + result);
         }
     }
