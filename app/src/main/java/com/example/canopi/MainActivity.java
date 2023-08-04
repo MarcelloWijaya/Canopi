@@ -2,6 +2,7 @@ package com.example.canopi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,8 +15,8 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageView canopyOpenImageView;
-    private ImageView canopyCloseImageView;
+    private ImageView canopyNotFilledImageView;
+    private ImageView canopyFilledImageView;
     private Button onButton1;
     private Button onButton2;
     private TextView textView;
@@ -28,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        canopyOpenImageView = findViewById(R.id.canopy_open);
-        canopyCloseImageView = findViewById(R.id.canopy_close);
+        canopyNotFilledImageView = findViewById(R.id.canopy_not_filled);
+        canopyFilledImageView = findViewById(R.id.canopy_filled);
         textView = findViewById(R.id.textView);
         onButton1 = findViewById(R.id.onButton1);
         onButton2 = findViewById(R.id.onButton2);
@@ -99,11 +100,11 @@ public class MainActivity extends AppCompatActivity {
 
             // Memperbarui tampilan tombol berdasarkan status canopy
             if ("terbuka".equals(statusCanopy)) {
-                canopyOpenImageView.setVisibility(View.VISIBLE);
-                canopyCloseImageView.setVisibility(View.GONE);
+                canopyNotFilledImageView.setVisibility(View.GONE);
+                canopyFilledImageView.setVisibility(View.VISIBLE);
             } else if ("tertutup".equals(statusCanopy)) {
-                canopyCloseImageView.setVisibility(View.VISIBLE);
-                canopyOpenImageView.setVisibility(View.GONE);
+                canopyFilledImageView.setVisibility(View.GONE);
+                canopyNotFilledImageView.setVisibility(View.VISIBLE);
             }
 
             // Mengatur teks di textView dengan hasil dari perintah yang dikirim
