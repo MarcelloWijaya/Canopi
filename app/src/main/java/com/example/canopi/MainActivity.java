@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private Button onButton1;
     private Button onButton2;
     private TextView textView;
+    private String statusCanopy = "tertutup";
     private static final String ESP32_IP_ADDRESS = "192.168.1.113"; // Ganti dengan IP ESP32 Anda
     private static final int ESP32_PORT = 80; // Ganti dengan port yang digunakan pada ESP32 Anda
 
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
+
             // Mengupdate status canopy berdasarkan hasil dari perintah yang dikirim
             if (result.equalsIgnoreCase("Terbuka")) {
                 statusCanopy = "terbuka";
