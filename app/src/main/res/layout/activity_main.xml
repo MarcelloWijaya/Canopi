@@ -12,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="520dp"
-        android:background="@drawable/button_background"
         android:backgroundTint="#2EC1CC"
         android:text="Off"
         app:layout_constraintEnd_toEndOf="parent"
