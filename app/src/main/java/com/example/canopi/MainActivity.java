@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
     private ImageView canopyCloseImageView;
     private Button onButton1;
     private Button onButton2;
-    private Button offButton;
     private TextView textView;
     private static final String ESP32_IP_ADDRESS = "192.168.1.113"; // Ganti dengan IP ESP32 Anda
     private static final int ESP32_PORT = 80; // Ganti dengan port yang digunakan pada ESP32 Anda
@@ -32,26 +31,31 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(R.id.textView);
         onButton1 = findViewById(R.id.onButton1);
         onButton2 = findViewById(R.id.onButton2);
-        offButton = findViewById(R.id.offButton);
 
-        onButton1.setOnClickListener(new View.OnClickListener() {
+        onButton1.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
-                new SendCommandTask().execute("ON1");
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    // When the button is pressed, send the "open" instruction to Arduino
+                    new SendCommandTask().execute("OPEN");
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    // When the button is released, send the "stop" instruction to Arduino
+                    new SendCommandTask().execute("STOP OPEN");
+                }
+                return false;
             }
         });
-
-        onButton2.setOnClickListener(new View.OnClickListener() {
+        onButton2.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
-                new SendCommandTask().execute("ON2");
-            }
-        });
-
-        offButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new SendCommandTask().execute("OFF");
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    // When the button is pressed, send the "open" instruction to Arduino
+                    new SendCommandTask().execute("CLOSE");
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    // When the button is released, send the "stop" instruction to Arduino
+                    new SendCommandTask().execute("STOP CLOSE");
+                }
+                return false;
             }
         });
     }
@@ -92,15 +96,9 @@ public class MainActivity extends AppCompatActivity {
 
             // Memperbarui tampilan tombol berdasarkan status canopy
             if ("terbuka".equals(statusCanopy)) {
-                // Jika status terbuka, maka tombol onButton1 akan ditampilkan, dan tombol onButton2 akan disembunyikan
-                onButton1.setVisibility(View.VISIBLE);
-                onButton2.setVisibility(View.GONE);
                 canopyOpenImageView.setVisibility(View.VISIBLE);
                 canopyCloseImageView.setVisibility(View.GONE);
             } else if ("tertutup".equals(statusCanopy)) {
-                // Jika status tertutup, maka tombol onButton2 akan ditampilkan, dan tombol onButton1 akan disembunyikan
-                onButton2.setVisibility(View.VISIBLE);
-                onButton1.setVisibility(View.GONE);
                 canopyCloseImageView.setVisibility(View.VISIBLE);
                 canopyOpenImageView.setVisibility(View.GONE);
             }
